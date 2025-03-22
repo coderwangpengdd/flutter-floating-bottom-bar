@@ -278,7 +278,7 @@ class _BottomBarState extends State<BottomBar>
             alignment: widget.barAlignment,
             child: SafeArea(
               child: Padding(
-                padding: EdgeInsets.all(widget.offset),
+                padding: EdgeInsets.only(bottom: widget.offset),
                 child: AnimatedOpacity(
                   duration: widget.duration,
                   curve: widget.curve,
