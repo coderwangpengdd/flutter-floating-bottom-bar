@@ -355,7 +355,7 @@ class _BottomBarState extends State<BottomBar>
           alignment: widget.barAlignment,
           child: SafeArea(
             child: Padding(
-              padding: EdgeInsets.all(widget.offset),
+              padding: EdgeInsets.only(bottom: widget.offset),
               child: SlideTransition(
                 position: _offsetAnimation,
                 child: Container(
