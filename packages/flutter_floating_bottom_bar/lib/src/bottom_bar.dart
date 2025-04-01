@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_floating_bottom_bar/src/bottom_bar_scroll_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -358,17 +360,20 @@ class _BottomBarState extends State<BottomBar>
               padding: EdgeInsets.only(bottom: widget.offset),
               child: SlideTransition(
                 position: _offsetAnimation,
-                child: Container(
-                  width: widget.width,
-                  decoration: widget.barDecoration ??
-                      BoxDecoration(
-                        color: widget.barColor,
-                        borderRadius: widget.borderRadius,
-                      ),
-                  child: Material(
-                    color: widget.barColor,
-                    child: widget.child,
-                    borderRadius: widget.borderRadius,
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
+                  child: Container(
+                    width: widget.width,
+                    decoration: widget.barDecoration ??
+                        BoxDecoration(
+                          color: widget.barColor,
+                          borderRadius: widget.borderRadius,
+                        ),
+                    child: Material(
+                      color: widget.barColor,
+                      child: widget.child,
+                      borderRadius: widget.borderRadius,
+                    ),
                   ),
                 ),
               ),
