@@ -130,6 +130,8 @@ class BottomBar extends StatefulWidget {
   /// The clipBehaviour property of the `Stack` in which the `BottomBar` is placed.
   final Clip clip;
 
+  final bool filter;
+
   const BottomBar({
     required this.body,
     required this.child,
@@ -142,6 +144,7 @@ class BottomBar extends StatefulWidget {
     this.end = 0,
     this.start = 2,
     this.offset = 10,
+    this.filter = false,
     this.duration = const Duration(milliseconds: 120),
     this.curve = Curves.linear,
     this.width = 300,
@@ -369,7 +372,15 @@ class _BottomBarState extends State<BottomBar>
                       ),
                   child: Material(
                     color: widget.barColor,
-                    child: widget.child,
+                    child: widget.filter
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+                              child: widget.child,
+                            ),
+                          )
+                        : widget.child,
                     borderRadius: widget.borderRadius,
                   ),
                 ),
