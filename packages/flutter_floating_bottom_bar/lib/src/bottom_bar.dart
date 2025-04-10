@@ -376,7 +376,7 @@ class _BottomBarState extends State<BottomBar>
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+                              filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
                               child: widget.child,
                             ),
                           )
