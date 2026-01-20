@@ -371,19 +371,13 @@ class _BottomBarState extends State<BottomBar>
                         borderRadius: widget.borderRadius,
                       ),
                   child: Material(
-                    // color: widget.barColor,
+                    color: widget.barColor,
                     child: widget.filter
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(100),
-                            child: Stack(
-                              children: [
-                                BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                                  child: Container(),
-                                ),
-                                widget.child
-                              ],
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                              child: widget.child,
                             ),
                           )
                         : widget.child,
