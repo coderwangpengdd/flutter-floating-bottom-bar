@@ -365,19 +365,35 @@ class _BottomBarState extends State<BottomBar>
                 position: _offsetAnimation,
                 child: Container(
                   width: widget.width,
-                  decoration: widget.barDecoration ??
-                      BoxDecoration(
-                        color: widget.barColor,
-                        borderRadius: widget.borderRadius,
-                      ),
                   child: Material(
-                    color: widget.barColor,
                     child: widget.filter
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(100),
                             child: BackdropFilter(
                               filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                              child: widget.child,
+                              child: SizedBox(
+                                width: widget.width,
+                                height: 52,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: widget.barColor,
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: widget.barDecoration ??
+                                          BoxDecoration(
+                                            color: widget.barColor,
+                                            borderRadius: widget.borderRadius,
+                                          ),
+                                    ),
+                                    widget.child
+                                  ],
+                                ),
+                              ),
                             ),
                           )
                         : widget.child,
