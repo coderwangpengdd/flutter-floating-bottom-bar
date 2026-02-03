@@ -356,48 +356,51 @@ class _BottomBarState extends State<BottomBar>
               ),
             ),
           ),
-        Align(
-          alignment: widget.barAlignment,
-          child: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(bottom: widget.offset),
-              child: SlideTransition(
-                position: _offsetAnimation,
-                child: widget.filter
-                    ? RepaintBoundary(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                            child: SizedBox(
-                              width: widget.width,
-                              height: 52,
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: widget.barColor,
-                                      borderRadius: BorderRadius.circular(100),
+        RepaintBoundary(
+          child: Align(
+            alignment: widget.barAlignment,
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: widget.offset),
+                child: SlideTransition(
+                  position: _offsetAnimation,
+                  child: widget.filter
+                      ? RepaintBoundary(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                              child: SizedBox(
+                                width: widget.width,
+                                height: 52,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: widget.barColor,
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    decoration: widget.barDecoration ??
-                                        BoxDecoration(
-                                          color: widget.barColor,
-                                          borderRadius: widget.borderRadius,
-                                        ),
-                                  ),
-                                  widget.child
-                                ],
+                                    Container(
+                                      decoration: widget.barDecoration ??
+                                          BoxDecoration(
+                                            color: widget.barColor,
+                                            borderRadius: widget.borderRadius,
+                                          ),
+                                    ),
+                                    widget.child
+                                  ],
+                                ),
                               ),
                             ),
                           ),
+                        )
+                      : Container(
+                          width: widget.width,
+                          child: widget.child,
                         ),
-                      )
-                    : Container(
-                        width: widget.width,
-                        child: widget.child,
-                      ),
+                ),
               ),
             ),
           ),
