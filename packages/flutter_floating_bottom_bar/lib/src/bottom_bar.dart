@@ -132,6 +132,8 @@ class BottomBar extends StatefulWidget {
 
   final bool filter;
 
+  final double blur;
+
   const BottomBar({
     required this.body,
     required this.child,
@@ -144,6 +146,7 @@ class BottomBar extends StatefulWidget {
     this.end = 0,
     this.start = 2,
     this.offset = 10,
+    this.blur = 32,
     this.filter = false,
     this.duration = const Duration(milliseconds: 120),
     this.curve = Curves.linear,
@@ -376,7 +379,8 @@ class _BottomBarState extends State<BottomBar>
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 32, sigmaY: 32),
+                              filter: ImageFilter.blur(
+                                  sigmaX: widget.blur, sigmaY: widget.blur),
                               child: widget.child,
                             ),
                           )
