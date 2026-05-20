@@ -362,47 +362,48 @@ class _BottomBarState extends State<BottomBar>
             child: SafeArea(
               child: Padding(
                 padding: EdgeInsets.only(bottom: widget.offset),
-                child: SlideTransition(
-                  position: _offsetAnimation,
-                  child: widget.filter
-                      ? RepaintBoundary(
-                          child: ClipRect(
+                child: widget.filter
+                    ? ClipRect(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                          child: SlideTransition(
+                            position: _offsetAnimation,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
-                              child: BackdropFilter(
-                                filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                                child: SizedBox(
-                                  width: widget.width,
-                                  height: 52,
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: widget.barColor,
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                        ),
+                              child: SizedBox(
+                                width: widget.width,
+                                height: 52,
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: widget.barColor,
+                                        borderRadius:
+                                            BorderRadius.circular(100),
                                       ),
-                                      Container(
-                                        decoration: widget.barDecoration ??
-                                            BoxDecoration(
-                                              color: widget.barColor,
-                                              borderRadius: widget.borderRadius,
-                                            ),
-                                      ),
-                                      widget.child
-                                    ],
-                                  ),
+                                    ),
+                                    Container(
+                                      decoration: widget.barDecoration ??
+                                          BoxDecoration(
+                                            color: widget.barColor,
+                                            borderRadius: widget.borderRadius,
+                                          ),
+                                    ),
+                                    widget.child
+                                  ],
                                 ),
                               ),
                             ),
                           ),
-                        )
-                      : Container(
+                        ),
+                      )
+                    : SlideTransition(
+                        position: _offsetAnimation,
+                        child: Container(
                           width: widget.width,
                           child: widget.child,
                         ),
-                ),
+                      ),
               ),
             ),
           ),
